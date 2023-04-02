@@ -37,7 +37,8 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/", "/home", "/register", "/password-reset", "/assets/**", "/*.css")
                             .permitAll()
-                        .requestMatchers(HttpMethod.POST, "/register").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/register")
+                            .permitAll()
                         .requestMatchers("/settings/**").hasAnyRole("USER")
                         .requestMatchers("/mod/**").hasAnyRole("MOD", "ADMIN")
                         .requestMatchers("/admin/**").hasAnyRole( "ADMIN")
