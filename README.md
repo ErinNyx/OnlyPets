@@ -2,10 +2,10 @@
 
 FOR ANDY AND DUNCAN
 Some changes to the DB
-- Removed settings.is_moderator
-- Removed settings.is_admin
-- Changed settings.timedout and Posts.created_at to int
-+ Added users.role
+\- Removed settings.is_moderator
+\- Removed settings.is_admin
+\- Changed settings.timedout and Posts.created_at to int
+\+ Added users.role
   On Login as it is now, I don't believe I have spring security setup to correctly read the roles. I thought that was handled for me as none of the documentation
   or tutorials I found mentioned how to do it, I'll try my best to update it by tomorrow
   
