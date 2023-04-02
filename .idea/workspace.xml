@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="4d56726f-2710-4436-b7ea-525ebfe24221" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/csc340sp23/OnlyPets/WebSecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/csc340sp23/OnlyPets/settings/Settings.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/csc340sp23/OnlyPets/settings/SettingsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/csc340sp23/OnlyPets/settings/SettingsRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/csc340sp23/OnlyPets/settings/SettingsService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/csc340sp23/OnlyPets/user/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/csc340sp23/OnlyPets/user/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/csc340sp23/OnlyPets/user/UserDetailsService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/csc340sp23/OnlyPets/user/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/csc340sp23/OnlyPets/user/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/settings-page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OnlyPets.iml" beforeDir="false" afterPath="$PROJECT_DIR$/OnlyPets.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/csc340sp23/OnlyPets/OnlyPetsApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/csc340sp23/OnlyPets/OnlyPetsApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/csc340sp23/OnlyPets/Router.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/csc340sp23/OnlyPets/Router.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/register.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/csc340sp23/OnlyPets/OnlyPetsApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/csc340sp23/OnlyPets/Router.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/assets/avatars/andy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/assets/avatars/duncan.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/assets/avatars/erin.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/assets/icons/passdog.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/assets/pets/a1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/assets/pets/d1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/assets/pets/d2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/assets/pets/e1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/assets/pets/e2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/global.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/home-admin.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/home-moderator.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/home-user.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/home.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/login.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/password-reset.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/register.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/home-admin.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/home-moderator.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/home-user.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/home.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/password-reset.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/register.html" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/main/resources/static/global.css" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/resources/templates/password-reset.html" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2NKe7RFMFGJsolJ15OaS5dsqjUj" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/home/erin/Documents/DEMO/onlypets",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
+    "spring.configuration.checksum": "b215b7d9b63142cee20639d5fe8213cb",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/static/assets/avatars" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="OnlyPetsApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="OnlyPets" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.csc340sp23.OnlyPets.OnlyPetsApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4d56726f-2710-4436-b7ea-525ebfe24221" name="Changes" comment="" />
+      <created>1679425198103</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1679425198103</updated>
+      <workItem from="1679425199133" duration="1225000" />
+      <workItem from="1679426492573" duration="529000" />
+      <workItem from="1679427106628" duration="144000" />
+      <workItem from="1679427618676" duration="4413000" />
+      <workItem from="1679453453342" duration="7418000" />
+      <workItem from="1679520652925" duration="654000" />
+      <workItem from="1679544626301" duration="303000" />
+      <workItem from="1679545217309" duration="1778000" />
+      <workItem from="1679584468735" duration="328000" />
+      <workItem from="1679584847545" duration="599000" />
+      <workItem from="1679593646054" duration="3000" />
+      <workItem from="1679593664061" duration="14000" />
+      <workItem from="1679599726366" duration="688000" />
+      <workItem from="1679929212558" duration="2000" />
+      <workItem from="1680346877647" duration="33619000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

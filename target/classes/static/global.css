@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300&display=swap');
+
+:root {
+    --main-bg-color: #F9F9F9;
+    --nav-div-color: #1B1C21;
+    --link-hover: #FFD500;
+    --link-color: rgb(142,142,160);
+    --div-color: rgba(190, 190, 192, 0.2);
+
+    --div-box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+body {
+    background: var(--main-bg-color);
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+* {
+    font-family: 'Poppins', serif;
+    font-size: 1.2vw;
+
+    color: var(--link-color);
+
+    transition: 0.4s;
+}
+
+#logo {
+    font-size: 2vw;
+    font-family: 'Pacifico', cursive;
+
+    font-weight: 999;
+}
+
+i, a {
+    text-decoration: none;
+
+    transition: 0.4s;
+}
+
+i:hover, a:hover {
+    cursor: pointer;
+    color: var(--link-hover);
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 10vh;
+
+    box-shadow: var(--div-box-shadow);
+
+    background: var(--nav-div-color);
+
+    z-index: 99999999;
+}
+
+#nav-left {
+    position: absolute;
+    left: 1vw;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#nav-right {
+    position: absolute;
+    right: 1vw;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#nav-right a {
+    margin-left: 1vh;
+}
+
+*::-webkit-scrollbar {
+    width: 3px;
+    background-color: #F5F5F5;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: gray;
+}
