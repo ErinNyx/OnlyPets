@@ -45,4 +45,4 @@ CREATE TABLE `reports` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `reported_by` int,
   `post` int
-);```
+);
