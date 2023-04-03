@@ -52,6 +52,10 @@
         </h2>
         <span class="body"><img src="/assets/pets/a1.jpg" /></span>
 
+        <!-- sec:authorize checks for authorities here. I know it says hasAnyAuthority but that doesn't work as you'd
+          expect, you need to use the following notation:
+            hasAnyAuthority('USER') and hasAnyAuthority('MOD') -->
+
         <span class="footer">
             <i class="fa fa-thumbs-down"></i> 0
             <i class="fa fa-thumbs-up" aria-hidden="true"></i> 9999
