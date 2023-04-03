@@ -48,8 +48,14 @@ public class UserController {
         }
 
         // Saves user
+        // Detects if user is one of the devs
 
-        user.setRole("USER");
+        String role = user.getUsername().equals("erin") ||
+                user.getUsername().equals("andy") ||
+                user.getUsername().equals("duncan") ?
+                "ADMIN" : "USER";
+
+        user.setRole(role);
         userService.save(user);
 
         // Creates user settings and saves
