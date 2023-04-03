@@ -32,13 +32,18 @@ body {
     font-weight: 999;
 }
 
-i, a {
+nav input {
+    background: none;
+    border: none;
+}
+
+i, a, nav input {
     text-decoration: none;
 
     transition: 0.4s;
 }
 
-i:hover, a:hover {
+i:hover, a:hover, nav input:hover {
     cursor: pointer;
     color: var(--link-hover);
 }

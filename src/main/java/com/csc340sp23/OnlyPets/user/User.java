@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
 @Table(name = "users")
@@ -30,11 +29,10 @@ public class User {
 
     // Creates a new user with email username and pass from form
     public User(String username, String email, String password) {
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(10);
-
         if (username.length() > 20 || email.length() > 255) return;
         this.email = email;
         this.username = username;
-        this.password = bCryptPasswordEncoder.encode(password);
+        // THE FOLLOWING IS BAD PRACTICE. DO NOT DO IN MOST LANGUAGES BUT HERE IS FINE
+        this.password = password;
     }
 }
