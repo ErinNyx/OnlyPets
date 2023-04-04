@@ -59,8 +59,9 @@ public class UserController {
         userService.save(user);
 
         // Creates user settings and saves
-
+        
         Settings setting = new Settings(user.id);
+
         settingsService.save(setting);
 
         return "redirect:/login";
