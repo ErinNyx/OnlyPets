@@ -29,4 +29,5 @@ import lombok.Setter;
             this.banned = false;
             this.timedout = 0;
         }
+
     }
