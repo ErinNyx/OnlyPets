@@ -6,10 +6,8 @@ Some changes to the DB
 - Removed settings.is_admin
 - Changed settings.timedout and Posts.created_at to int
 + Added users.role
-  
- At the very least, the basics should be in place. You can register an account and login. Giving the wrong credentials on login will not crash the server
- however it's also not handled correctly. I'll be doing basic housekeeping for that as well tomorrow.
- 
+At the very least, the basics should be in place. You can register an account and login. Giving the wrong credentials on login will not crash the server however it's also not handled correctly. I'll be doing basic housekeeping for that as well tomorrow.
+   
  Thank you for being patient. Here's the updated SQL code. DB should be created as "onlypets"
  ```SQL
  CREATE TABLE `users` (
