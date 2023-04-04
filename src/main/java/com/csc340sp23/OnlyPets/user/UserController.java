@@ -17,6 +17,9 @@ public class UserController {
     UserService userService;
     @Autowired
     SettingsService settingsService;
+    
+    @Autowired
+    AdminUserController adminUserController;
 
     @PostMapping("/register")
     public String registerUser(User user, RedirectAttributes re) {
@@ -48,13 +51,24 @@ public class UserController {
         }
 
         // Saves user
+        // Detects if user is one of the devs
 
-        user.setRole("USER");
+        String role = user.getUsername().equals("erin") ||
+                user.getUsername().equals("andy") ||
+                user.getUsername().equals("duncan") ?
+                "ADMIN" : "USER";
+
+        user.setRole(role);
         userService.save(user);
 
-        // Creates user settings and saves
 
+        //temporary for testing purposes
+        if(user.getUsername().equals("modmepls")) adminUserController.hireMod(user);
+
+        // Creates user settings and saves
+        
         Settings setting = new Settings(user.id);
+
         settingsService.save(setting);
 
         return "redirect:/login";
@@ -65,4 +79,15 @@ public class UserController {
     public String registerPage(Model model) {
         return "register";
     }
+
+    // Was testing to see if Authentication was working. Turns out, even if the user has USER as role, they can still
+    // call the /admin/test url, it just shows as 404.
+    // Even though if you're not authenticated at all you get redirected
+    // to login which was the expected behaviour for a USER trying to access ADMIN resources but ig I was wrong on that
+    // assumption. Don't assume things kids, I spent like 12 hours on this.
+
+    /*@GetMapping("/admin/test")
+    public String authTest(Model model) {
+        return "temporary-admin-test-for-auth";
+    }*/
 }

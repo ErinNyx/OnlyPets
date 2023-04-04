@@ -14,13 +14,22 @@ import java.util.Collection;
 public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
     @Autowired
     UserService userService;
+
+    // This is called in the websecurityconfig file in configureGlobal for every authentication.
+    // I just have a custom UserService which isn't recommended apparently by like everyone
+    // WHO CARES
+    // So this was my solution
+    // Checks if Username exists, if not it throws an exception which I still need to write the logic for on the front
+    // end to alert the user that the username was invalid. I also still need to write the logic for users who use the
+    // wrong password.
+
+    // The logic here after that is pretty self-explanatory, I just had to hardcode things like isAccountNonExpired()
+    // to return true. Later, when timeout is fully implemented, Duncan will need to go in here and write the logic for
+    // preventing timed out users from logging in.
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userService.getUserByUsername(username);
-        if(user == null) {
-            Exception test = new UsernameNotFoundException("Username: " + username);
-            test.printStackTrace();
-        }
+        if(user == null) throw new UsernameNotFoundException("Username not found: " + username);
         return new UserDetails() {
             @Override
             public Collection<? extends GrantedAuthority> getAuthorities() {
