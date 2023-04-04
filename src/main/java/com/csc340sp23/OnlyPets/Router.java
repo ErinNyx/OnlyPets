@@ -1,5 +1,6 @@
 package com.csc340sp23.OnlyPets;
 
+import com.csc340sp23.OnlyPets.past.PostService;
 import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 public class Router {
     @Autowired
+    PostService postService;
 
     @GetMapping()
-    public String defaultHomePage() {
+    public String defaultHomePage(Model model) {
+        model.addAttribute("postList", postService.getAllPosts());
         return "home";
     }
 

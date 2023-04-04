@@ -32,117 +32,34 @@
     </span>
 </nav>
 
-<form id="post" sec:authorize="isAuthenticated()">
-    <input type="text" placeholder="Add a title to your post!" />
-    <input type="file" required />
+<form id="post" method="POST" action="/post" sec:authorize="isAuthenticated()">
+    <input type="text" name="title" placeholder="Add a title to your post!" />
+    <!--input type="file" required /-->
     <input type="submit" value="Post" />
+    <input type="hidden" name="author" value="1" />
+    <input type="hidden"
+           th:name="${_csrf.parameterName}"
+           th:value="${_csrf.token}"/>
 </form>
 
 <section>
-    <div class="post">
-        <h2>
-            <span class="header">
-                <span class="user">
-                    <img class="avatar" src="/assets/avatars/andy.png" />
-                    <a>AndyB</a>
-                </span>
-            </span>
 
-            Y'all are bitches
-        </h2>
-        <span class="body"><img src="/assets/pets/a1.jpg" /></span>
-
-        <!-- sec:authorize checks for authorities here. I know it says hasAnyAuthority but that doesn't work as you'd
-          expect, you need to use the following notation:
-            hasAnyAuthority('USER') and hasAnyAuthority('MOD') -->
-
-        <span class="footer">
-            <i class="fa fa-thumbs-down"></i> 0
-            <i class="fa fa-thumbs-up" aria-hidden="true"></i> 9999
-            <a sec:authorize="hasAnyAuthority('USER')">Report User</a>
-            <a sec:authorize="hasAnyAuthority('USER')">Block User</a>
-        </span>
-    </div>
-
-    <div class="post">
+    <div class="post" th:each="post : ${postList}">
         <h2>
             <span class="header">
                 <span class="user">
                     <img class="avatar" src="/assets/avatars/erin.png" />
-                    <a>Erin</a>
+                    <a th:text="${post.authorName}"></a>
                 </span>
             </span>
-
-            Oh pls, Nyx will eat you for brunch t(-_-t)
+            <a th:text="${post.title}"></a>
         </h2>
 
-        <span class="body"><img src="/assets/pets/e2.jpg" /></span>
+        <span class="body"><img th:src="${post.picture}" /></span>
 
         <span class="footer">
-            <i class="fa fa-thumbs-down"></i> 0
-            <i class="fa fa-thumbs-up" aria-hidden="true"></i> 69420
-            <a sec:authorize="hasAnyAuthority('USER')">Report User</a>
-            <a sec:authorize="hasAnyAuthority('USER')">Block User</a>
-        </span>
-    </div>
-
-    <div class="post">
-        <!--This is a post without a title-->
-        <h2>
-            <span class="user">
-                <img class="avatar" src="/assets/avatars/duncan.jpg" />
-                <a>DuncanWozTaken</a>
-            </span>
-        </h2>
-
-        <span class="body"><img src="/assets/pets/d1.jpg" /></span>
-
-        <span class="footer">
-            <i class="fa fa-thumbs-down"></i> 0
-            <i class="fa fa-thumbs-up" aria-hidden="true"></i> 12
-            <a sec:authorize="hasAnyAuthority('USER')">Report User</a>
-            <a sec:authorize="hasAnyAuthority('USER')">Block User</a>
-        </span>
-    </div>
-
-    <div class="post">
-        <h2>
-            <span class="header">
-                <span class="user">
-                    <img class="avatar" src="/assets/avatars/duncan.jpg" />
-                    <a>DuncanWozTaken</a>
-                </span>
-            </span>
-
-            Well, my dog can beat you up
-        </h2>
-
-        <span class="body"><img src="/assets/pets/d2.jpg" /></span>
-
-        <span class="footer">
-            <i class="fa fa-thumbs-down"></i> 0
-            <i class="fa fa-thumbs-up" aria-hidden="true"></i> 2
-            <a sec:authorize="hasAnyAuthority('USER')">Report User</a>
-            <a sec:authorize="hasAnyAuthority('USER')">Block User</a>
-        </span>
-    </div>
-
-    <div class="post">
-        <h2>
-            <span class="header">
-                <span class="user">
-                    <img class="avatar" src="/assets/avatars/erin.png" />
-                    <a>Erin</a>
-                </span>
-            </span>
-            Check out Muffin!
-        </h2>
-
-        <span class="body"><img src="/assets/pets/e1.jpg" /></span>
-
-        <span class="footer">
-            <i class="fa fa-thumbs-down"></i> 0
-            <i class="fa fa-thumbs-up" aria-hidden="true"></i> 9001
+            <i class="fa fa-thumbs-down" th:text="${post.dislikes}"></i>
+            <i class="fa fa-thumbs-up" aria-hidden="true" th:text="${post.likes}"></i>
             <a sec:authorize="hasAnyAuthority('USER')">Report User</a>
             <a sec:authorize="hasAnyAuthority('USER')">Block User</a>
         </span>
