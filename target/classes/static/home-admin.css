@@ -1,8 +1,9 @@
 section {
     position: absolute;
     display: flex;
-    flex-direction: row;
+    flex-direction: column-reverse;
     justify-content: center;
+    align-items: center;
 
     flex-wrap: wrap;
 
@@ -18,8 +19,8 @@ section {
 
     justify-content: space-between;
 
-    min-height: 45vh;
-    width: 25vw;
+    min-height: 85vh;
+    width: 45vw;
 
     background: var(--div-color);
     box-shadow: var(--div-box-shadow);
@@ -55,11 +56,9 @@ section {
 
 .body img {
     position: relative;
-    min-width: 55%;
+    height: 65vh;
+    width: auto;
     max-width: 100%;
-    height: auto;
-
-    max-height: 100%;
 
     left: 50%;
 
