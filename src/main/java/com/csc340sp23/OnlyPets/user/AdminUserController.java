@@ -7,27 +7,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequestMapping("/home-admin")
+@RequestMapping("/dashboard")
 public class AdminUserController {
     @Autowired UserService userService;
 
-    @PostMapping
-    public String isAdmin(User user, RedirectAttributes re){
-        if(!userService.getUserById(user.getId()).getRole().equalsIgnoreCase("ADMIN")){
-            re.addFlashAttribute("error", "You do not have admin access rights!");
-            return "redirect:/login";
-        }
-        return "redirect:/admin-hired";
-    }
-
-    @PostMapping
-    public String hireMod(User user, RedirectAttributes re){
+    @PostMapping("/hire")
+    public void hireMod(User user){
         if(!userService.getUserById(user.getId()).getRole().equalsIgnoreCase("MOD")){
+            System.out.println(user.getRole());
             user.setRole("MOD");
             userService.save(user);
+            System.out.println(user.getRole());
         }
-        return "redirect:/admin-hired";
+
     }
+    @PostMapping("/fire")
+    public void fireMod(User user){
+        if(userService.getUserById(user.getId()).getRole().equalsIgnoreCase("MOD")){
+            System.out.println("User role after registration" + user.getRole());
+            user.setRole("USER");
+            userService.save(user);
+            System.out.println("User role after hireMod()" + user.getRole());
+        }
+
+    }
+
 
 
 }

