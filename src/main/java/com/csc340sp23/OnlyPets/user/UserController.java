@@ -60,7 +60,11 @@ public class UserController {
 
         // Creates user settings and saves
 
+        // This is a created settings object but you should be pulling from the db
+        // so like Settings setting = settingsService.getSettingsByUserId(userId);
+        // setting.setTimedout(43200000);
         Settings setting = new Settings(user.id);
+
         settingsService.save(setting);
 
         return "redirect:/login";
