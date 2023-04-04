@@ -45,4 +45,9 @@ public class Router {
     public String passwordResetPage() {
         return "password-reset";
     }
+
+    @GetMapping("/admin-hired")
+    public String adminHiredPage() {
+        return "admin-hired";
+    }
 }
