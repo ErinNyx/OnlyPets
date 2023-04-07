@@ -12,7 +12,7 @@ At the very least, the basics should be in place. You can register an account an
  ```SQL
  CREATE TABLE `users` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
-  `username` varchar(20) UNIQUE,
+  `username` varchar(75) UNIQUE,
   `email` varchar(255) UNIQUE,
   `password` text,
   `role` text DEFAULT "USER"
@@ -29,7 +29,7 @@ CREATE TABLE `posts` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `likes` int,
   `dislikes` int,
-  `author` varchar(20),
+  `author` text,
   `reports` int DEFAULT 0,
   `title` varchar(20),
   `picture` text COMMENT 'href to files assets/pets',
