@@ -42,8 +42,7 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/register")
                         .permitAll()
                         .requestMatchers("/settings/**").hasAnyAuthority("USER")
-                        .requestMatchers("/mod/**").hasAnyAuthority("MOD", "ADMIN")
-                        .requestMatchers("/admin/**").hasAuthority( "ADMIN")
+                        .requestMatchers("/dashboard/**").hasAnyAuthority("MOD", "ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form

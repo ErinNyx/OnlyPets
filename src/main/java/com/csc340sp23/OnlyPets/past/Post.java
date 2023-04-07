@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.File;
+
 @Entity
 @Table(name = "posts")
 @NoArgsConstructor
@@ -26,15 +28,14 @@ public class Post {
     int dislikes;
     int reports;
     int created_at;
-    int author;
+    String author;
     String title;
     Boolean flagged;
     String picture;
-    String authorName;
 
 
     // Creates a new post with passed author and title
-    public Post(int author, String title) {
+    public Post(String author, String title) {
         this.author = author;
         this.title = title;
     }

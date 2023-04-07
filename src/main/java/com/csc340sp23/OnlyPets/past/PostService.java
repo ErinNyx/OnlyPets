@@ -20,9 +20,9 @@ public class PostService {
         return repo.getReferenceById(postId);
     }
 
-    public Post getPostByAuthorId(int userId) {
+    public Post getPostByAuthor(String username) {
         List<Post> posts = getAllPosts();
-        return posts.stream().filter(post -> post.getAuthor() == userId)
+        return posts.stream().filter(post -> post.getAuthor() == username)
                 .findFirst().orElse(null);
     }
 

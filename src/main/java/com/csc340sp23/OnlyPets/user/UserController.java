@@ -58,15 +58,14 @@ public class UserController {
                 user.getUsername().equals("duncan") ?
                 "ADMIN" : "USER";
 
+        user.setAvatar("/assets/avatars/default.png");
         user.setRole(role);
         userService.save(user);
-
 
         //temporary for testing purposes
         if(user.getUsername().equals("modmepls")) adminUserController.hireMod(user);
 
         // Creates user settings and saves
-        
         Settings setting = new Settings(user.id);
 
         settingsService.save(setting);
