@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/")
 public class UserController {
@@ -89,4 +91,12 @@ public class UserController {
     public String authTest(Model model) {
         return "temporary-admin-test-for-auth";
     }*/
+
+    @PostMapping("/dashboard")
+    public String dashboardPage(Model model){
+        List<User> listUsers = userService.getAllUsers();
+        model.addAttribute("listUsers", listUsers);
+        return "dashboard";
+    }
+
 }
