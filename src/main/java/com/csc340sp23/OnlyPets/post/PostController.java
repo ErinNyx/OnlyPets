@@ -1,14 +1,13 @@
-package com.csc340sp23.OnlyPets.past;
+package com.csc340sp23.OnlyPets.post;
 
-import com.csc340sp23.OnlyPets.past.Post;
-import com.csc340sp23.OnlyPets.past.PostService;
+import com.csc340sp23.OnlyPets.ratings.Dislikes;
+import com.csc340sp23.OnlyPets.ratings.Likes;
+import com.csc340sp23.OnlyPets.ratings.RatingService;
+import com.csc340sp23.OnlyPets.user.User;
 import com.csc340sp23.OnlyPets.user.UserService;
-import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -23,6 +22,8 @@ public class PostController {
     PostService postService;
     @Autowired
     UserService userService;
+    @Autowired
+    RatingService ratingService;
 
     // the picture is hardcoded because I need to work on the front end to submit pictures
     @PostMapping("/post")
@@ -39,8 +40,6 @@ public class PostController {
         }
 
         post.setFlagged(false);
-        post.setLikes(0);
-        post.setDislikes(0);
         post.setReports(0);
 
         post.setCreated_at((int) System.currentTimeMillis());
@@ -71,5 +70,63 @@ public class PostController {
         }
 
         return "redirect:/";
+    }
+
+    @GetMapping("/like")
+    @ResponseBody
+    public int[] likePost(@RequestParam int postId, @RequestParam String username) {
+        User user = userService.getUserByUsername(username);
+        Post post = postService.getPostById(postId);
+
+        int[] response = new int[2];
+
+        if(ratingService.hasLiked(user, post)) {
+            response[0] = ratingService.getAllLikesByPost(post).size();
+            response[1] = ratingService.getAllDislikesByPost(post).size();
+            return response;
+        }
+
+        if(ratingService.hasDisliked(user, post)) {
+            ratingService.deleteDislike(user, post);
+        }
+
+        postService.save(post);
+
+        Likes like = new Likes(post, user);
+        ratingService.saveLike(like);
+
+        response[0] = ratingService.getAllLikesByPost(post).size();
+        response[1] = ratingService.getAllDislikesByPost(post).size();
+
+        return response;
+    }
+
+    @GetMapping("/dislike")
+    @ResponseBody
+    public int[] dislikePost(@RequestParam int postId, @RequestParam String username) {
+        User user = userService.getUserByUsername(username);
+        Post post = postService.getPostById(postId);
+
+        int[] response = new int[2];
+
+        if(ratingService.hasDisliked(user, post)) {
+            response[1] = ratingService.getAllLikesByPost(post).size();
+            response[0] = ratingService.getAllDislikesByPost(post).size();
+            return response;
+        }
+
+        if(ratingService.hasLiked(user, post)) {
+            ratingService.deleteLike(user, post);
+        }
+
+        postService.save(post);
+
+        Dislikes dislike = new Dislikes(post, user);
+        ratingService.saveDislike(dislike);
+
+        response[1] = ratingService.getAllLikesByPost(post).size();
+        response[0] = ratingService.getAllDislikesByPost(post).size();
+
+        return response;
     }
 }

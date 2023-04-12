@@ -1,6 +1,5 @@
-package com.csc340sp23.OnlyPets.past;
+package com.csc340sp23.OnlyPets.post;
 
-import com.csc340sp23.OnlyPets.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -7,9 +7,40 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
     <link rel="stylesheet" type="text/css" href="/home.css" />
+
     <script>
         function closeModal() {
             document.querySelector('.alert').remove();
+        }
+
+        function likeHandler(user, post) {
+            const getRating = async () => {
+                var rating = await fetch('/like?' + new URLSearchParams({
+                    username: user,
+                    postId: post
+                })).then((res) => res.json());
+                document.getElementById("dislike"+post).innerText = rating[1];
+                document.getElementById("like"+post).innerText = rating[0];
+
+                document.getElementById("like"+post).style = "color: var(--link-hover)";
+                document.getElementById("dislike"+post).style = "color: var(--link-color)";
+            }
+            getRating();
+        }
+
+        function dislikeHandler(user, post) {
+            const getRating = async () => {
+                var rating = await fetch('/dislike?' + new URLSearchParams({
+                    username: user,
+                    postId: post
+                })).then((res) => res.json());
+                document.getElementById("dislike"+post).innerText = rating[0];
+                document.getElementById("like"+post).innerText = rating[1];
+
+                document.getElementById("dislike"+post).style = "color: var(--link-hover)";
+                document.getElementById("like"+post).style = "color: var(--link-color)";
+            }
+            getRating();
         }
     </script>
 </head>
@@ -60,13 +91,13 @@
 
 <a sec:authorize="hasAnyAuthority('ADMIN') and hasAnyAuthority('MOD')" href="/dashboard">Dashboard</a>
 
-<section>
+<section th:each="user : ${userService}">
     <div class="post" th:each="post : ${postList}">
-        <h2 th:each="user : ${userService.getUserByUsername(post.author)}">
+        <h2>
             <span class="header">
                 <span class="user">
-                    <img class="avatar" th:src="${user.avatar}" />
-                    <a th:text="${user.username}"></a>
+                    <img class="avatar" th:src="${user.getUserByUsername(post.author).avatar}" />
+                    <a th:text="${post.author}"></a>
                 </span>
             </span>
             <a th:text="${post.title}"></a>
@@ -74,9 +105,21 @@
 
         <span class="body"><img th:src="${post.picture}" /></span>
 
-        <span class="footer">
-            <i class="fa fa-thumbs-down" th:text="${post.dislikes}"></i>
-            <i class="fa fa-thumbs-up" aria-hidden="true" th:text="${post.likes}"></i>
+        <span class="footer" th:each="rating : ${ratingService}">
+            <a class="fa fa-thumbs-down dislikes" th:text="${' ' + ratingService.getAllDislikesByPost(post).size()}"
+               th:style="${'color: ' + ratingService.checkDislike(user.getUserByUsername(#authentication.getName()), post)}"
+               th:data-user="${#authentication.getName()}"
+               th:data-post="${post.getId()}"
+               th:id="${'dislike' + post.getId()}"
+               onclick="dislikeHandler(this.getAttribute('data-user'), this.getAttribute('data-post'))" sec:authorize="isAuthenticated()"></a>
+
+            <a class="fa fa-thumbs-up likes" aria-hidden="true" th:text="${' ' + ratingService.getAllLikesByPost(post).size()}"
+               th:style="${'color: ' + ratingService.checkLike(user.getUserByUsername(#authentication.getName()), post)}"
+               th:data-user="${#authentication.getName()}"
+               th:data-post="${post.getId()}"
+               th:id="${'like' + post.getId()}"
+               onclick="likeHandler(this.getAttribute('data-user'), this.getAttribute('data-post'))" sec:authorize="isAuthenticated()"></a>
+
             <a sec:authorize="hasAnyAuthority('USER')">Report User</a>
             <a sec:authorize="hasAnyAuthority('USER')">Block User</a>
         </span>
