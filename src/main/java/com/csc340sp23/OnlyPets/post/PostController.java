@@ -129,4 +129,18 @@ public class PostController {
 
         return response;
     }
+
+    @GetMapping("/delete")
+    public void deletePost(@RequestParam int postId, @RequestParam String username) {
+        User user = userService.getUserByUsername(username);
+        Post post = postService.getPostById(postId);
+
+
+        System.out.println(user.getUsername());
+        System.out.println(post.getAuthor());
+
+        if(!user.getUsername().equals(post.getAuthor())) return;
+
+        postService.deletePost(post);
+    }
 }

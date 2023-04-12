@@ -28,4 +28,8 @@ public class PostService {
     public void save(Post post) {
         repo.save(post);
     }
+
+    public void deletePost(Post post) {
+        repo.delete(post);
+    }
 }
