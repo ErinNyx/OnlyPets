@@ -24,11 +24,19 @@
         <!-- Spring security changes view based on authorization and role. Here, I did it based on auth to change the
          view from Login and Sign Up to Logout based on auth. _csrf is important for Spring Security and this reactive
           th value allows the form to be submitted. Otherwise, spring will prevent the post request -->
+
         <a href="/login" sec:authorize="isAnonymous()">Log in</a>
         <a href="/register" sec:authorize="isAnonymous()">Sign up</a>
 
         <form action="/logout" method="POST" sec:authorize="isAuthenticated()">
             <input type="submit" value="Logout" />
+            <input type="hidden"
+                   th:name="${_csrf.parameterName}"
+                   th:value="${_csrf.token}"/>
+        </form>
+
+        <form action="/dashboard" method="POST" sec:authorize="isAuthenticated()">
+            <input type="submit" value="Dashboard" />
             <input type="hidden"
                    th:name="${_csrf.parameterName}"
                    th:value="${_csrf.token}"/>
@@ -50,7 +58,7 @@
            th:value="${_csrf.token}"/>
 </form>
 
-<a sec:authorize="hasAnyAuthority('ADMIN') and hasAnyAuthority('MOD')" href="/dashboard"></a>
+<a sec:authorize="hasAnyAuthority('ADMIN') and hasAnyAuthority('MOD')" href="/dashboard">Dashboard</a>
 
 <section>
     <div class="post" th:each="post : ${postList}">
