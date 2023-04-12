@@ -1,13 +1,12 @@
 package com.csc340sp23.OnlyPets;
 
-import com.csc340sp23.OnlyPets.past.PostService;
+import com.csc340sp23.OnlyPets.post.PostService;
+import com.csc340sp23.OnlyPets.ratings.RatingService;
 import com.csc340sp23.OnlyPets.user.UserService;
 import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 // Temporary Routing file for Project Demo
@@ -21,10 +20,15 @@ public class Router {
     @Autowired
     UserService userService;
 
+    @Autowired
+    RatingService ratingService;
+
     @GetMapping()
     public String defaultHomePage(Model model) {
         model.addAttribute("postList", postService.getAllPosts());
         model.addAttribute("userService", userService);
+        model.addAttribute("postService", postService);
+        model.addAttribute("ratingService", ratingService);
         return "home";
     }
 

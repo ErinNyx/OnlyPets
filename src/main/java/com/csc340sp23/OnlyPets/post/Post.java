@@ -1,4 +1,4 @@
-package com.csc340sp23.OnlyPets.past;
+package com.csc340sp23.OnlyPets.post;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -8,8 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.io.File;
 
 @Entity
 @Table(name = "posts")
@@ -24,8 +22,6 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-    int likes;
-    int dislikes;
     int reports;
     int created_at;
     String author;
