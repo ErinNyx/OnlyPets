@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/")
 public class UserController {
@@ -17,6 +19,9 @@ public class UserController {
     UserService userService;
     @Autowired
     SettingsService settingsService;
+    
+    @Autowired
+    AdminUserController adminUserController;
 
     @PostMapping("/register")
     public String registerUser(User user, RedirectAttributes re) {
@@ -55,11 +60,14 @@ public class UserController {
                 user.getUsername().equals("duncan") ?
                 "ADMIN" : "USER";
 
+        user.setAvatar("/assets/avatars/default.png");
         user.setRole(role);
         userService.save(user);
 
+        //temporary for testing purposes
+        if(user.getUsername().equals("modmepls")) adminUserController.hireMod(user);
+
         // Creates user settings and saves
-        
         Settings setting = new Settings(user.id);
 
         settingsService.save(setting);
@@ -83,4 +91,12 @@ public class UserController {
     public String authTest(Model model) {
         return "temporary-admin-test-for-auth";
     }*/
+
+    @PostMapping("/dashboard")
+    public String dashboardPage(Model model){
+        List<User> listUsers = userService.getAllUsers();
+        model.addAttribute("listUsers", listUsers);
+        return "dashboard";
+    }
+
 }

@@ -38,12 +38,11 @@ public class WebSecurityConfig {
         http
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/", "/home", "/register", "/password-reset", "/assets/**", "/*.css")
-                            .permitAll()
+                        .permitAll()
                         .requestMatchers(HttpMethod.POST, "/register")
-                            .permitAll()
+                        .permitAll()
                         .requestMatchers("/settings/**").hasAnyAuthority("USER")
-                        .requestMatchers("/mod/**").hasAnyAuthority("MOD", "ADMIN")
-                        .requestMatchers("/admin/**").hasAuthority( "ADMIN")
+                        .requestMatchers("/dashboard/**").hasAnyAuthority("MOD", "ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
