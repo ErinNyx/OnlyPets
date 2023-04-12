@@ -135,12 +135,14 @@ public class PostController {
         User user = userService.getUserByUsername(username);
         Post post = postService.getPostById(postId);
 
-
-        System.out.println(user.getUsername());
-        System.out.println(post.getAuthor());
-
         if(!user.getUsername().equals(post.getAuthor())) return;
 
         postService.deletePost(post);
+    }
+    @GetMapping("/report")
+    public void reportPost(@RequestParam int postId, @RequestParam String username) {
+        User user = userService.getUserByUsername(username);
+
+        postService.reportPost(user.getId(), postId);
     }
 }

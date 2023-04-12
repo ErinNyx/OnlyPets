@@ -50,6 +50,14 @@
             })).then(() => window.location.href = '/');
             req();
         }
+
+        function reportHandler(user, post) {
+            const req = async () => await fetch('/report?' + new URLSearchParams({
+                username: user,
+                postId: post
+            })).then(() => alert('Report submitted. If you think we\'ll need additional information to wewontcheckthisemailaddress@gofuckyourself.com'));
+            req();
+        }
     </script>
 </head>
 <body>
@@ -138,8 +146,11 @@
                sec:authorize="isAuthenticated()"
                th:if="${#authentication.getName() == post.getAuthor()}"></a>
 
-            <a sec:authorize="hasAnyAuthority('USER')">Report User</a>
-            <a sec:authorize="hasAnyAuthority('USER')">Block User</a>
+            <a th:data-user="${#authentication.getName()}"
+               th:data-post="${post.getId()}"
+               th:id="${'report' + post.getId()}"
+               onclick="reportHandler(this.getAttribute('data-user'), this.getAttribute('data-post'))"
+               sec:authorize="isAuthenticated()">Report User</a>
         </span>
     </div>
 </section>
