@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>OnlyPets | Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="/global.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+    <link rel="stylesheet" type="text/css" href="/home.css" />
+</head>
+<nav>
+    <span id="nav-left">
+        <a href="/" id="logo">OnlyPets</a>
+    </span>
+
+    <span id="nav-right">
+        <!-- Spring security changes view based on authorization and role. Here, I did it based on auth to change the
+         view from Login and Sign Up to Logout based on auth. _csrf is important for Spring Security and this reactive
+          th value allows the form to be submitted. Otherwise, spring will prevent the post request -->
+
+        <a href="/login" sec:authorize="isAnonymous()">Log in</a>
+        <a href="/register" sec:authorize="isAnonymous()">Sign up</a>
+
+        <form action="/logout" method="POST" sec:authorize="isAuthenticated()">
+            <input type="submit" value="Logout" />
+            <input type="hidden"
+                   th:name="${_csrf.parameterName}"
+                   th:value="${_csrf.token}"/>
+        </form>
+    </span>
+</nav>
+
+
+
+
+
+<div class="right-bar">
+    <div class="top-part">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+             class="feather feather-users">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>
+        <div class="count">6</div>
+    </div>
+    <div class="header">Mods</div>
+    <div class="task-box yellow">
+        <div class="description-task">
+            <div class="time">08:00 - 09:00 AM</div>
+            <div class="task-name">Mods</div>
+        </div>
+        <div class="more-button"></div>
+        <div class="members">
+            <h1>Something6</h1>
+        </div>
+    </div>
+    <div class="task-box blue">
+        <div class="description-task">
+            <div class="time">10:00 - 11:00 AM</div>
+        </div>
+        <div class="more-button"></div>
+        <div class="members">
+            <h1>Something5</h1>
+        </div>
+    </div>
+    <div class="task-box red">
+        <div class="description-task">
+            <div class="time">01:00 - 02:00 PM</div>
+        </div>
+        <div class="more-button"></div>
+        <div class="members">
+            <h1>Something4</h1>
+        </div>
+    </div>
+    <div class="task-box green">
+        <div class="description-task">
+        </div>
+        <div class="more-button"></div>
+        <div class="members">
+            <h1>Something3</h1>
+        </div>
+    </div>
+    <div class="task-box blue">
+        <div class="description-task">
+        </div>
+        <div class="more-button"></div>
+        <div class="members">
+            <h1>Something2</h1>
+        </div>
+    </div>
+    <div class="task-box yellow">
+        <div class="description-task">
+        </div>
+        <div class="more-button"></div>
+        <div class="members">
+            <h1>Something</h1>
+        </div>
+    </div>
+</div>
+</html>
