@@ -144,7 +144,9 @@
                th:id="${'delete' + post.getId()}"
                onclick="deleteHandler(this.getAttribute('data-user'), this.getAttribute('data-post'))"
                sec:authorize="isAuthenticated()"
-               th:if="${#authentication.getName() == post.getAuthor()}"></a>
+               th:if="${#authentication.getName() == post.getAuthor()
+               or user.getUserByUsername(#authentication.getName()).getRole() == 'MOD'
+               or user.getUserByUsername(#authentication.getName()).getRole() == 'ADMIN'}"></a>
 
             <a th:data-user="${#authentication.getName()}"
                th:data-post="${post.getId()}"

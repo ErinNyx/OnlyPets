@@ -27,6 +27,9 @@ public class User {
     private String password;
     private String role;
     private String avatar;
+    private long timedout;
+    private boolean banned;
+    private boolean verified;
 
     // Creates a new user with email username and pass from form
     public User(String username, String email, String password) {

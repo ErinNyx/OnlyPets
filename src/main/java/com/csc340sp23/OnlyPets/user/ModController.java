@@ -33,18 +33,17 @@ public class ModController {
         User user = userService.getUserByUsername(username);
         
         // Converts timeout duration from hours to milliseconds.
-        int timeMillis = duration * 3600000;
-        
-        // Gets settings of user to be timed out.
-        Settings settings = settingsService.getSettingsByUserId(user.id);
-        
-        // Applies timeout to user's settings.
-        settings.setTimedout((int)date + timeMillis);
-        
-        // Saves settings
-        settingsService.save(settings);
-        
-        return "redirect:/home-moderator";
+        long timeMillis = duration * 3600000;
+
+        long timeout = timeMillis + date;
+
+        System.out.println(timeout);
+
+        user.setTimedout(timeout);
+
+        userService.save(user);
+
+        return "redirect:/dashboard";
     }
     
     @GetMapping("/timeout")
