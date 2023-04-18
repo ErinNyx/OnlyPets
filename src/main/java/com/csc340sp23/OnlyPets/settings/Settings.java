@@ -20,13 +20,10 @@ import lombok.Setter;
         @Id
         private int id;
         private String avatar;
-        private Boolean banned;
-        private int timedout;
+
 
         public Settings(int id) {
             this.id = id;
             this.avatar = "/assets/avatars/default.jpg";
-            this.banned = false;
-            this.timedout = 0;
         }
 }
