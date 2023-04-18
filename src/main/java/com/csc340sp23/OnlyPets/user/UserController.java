@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -94,8 +95,9 @@ public class UserController {
 
     @PostMapping("/dashboard")
     public String dashboardPage(Model model){
-        List<User> listUsers = userService.getAllUsers();
-        model.addAttribute("listUsers", listUsers);
+        List<User> modList = userService.getUsersByRole();
+        System.out.println(Arrays.toString(modList.toArray()));
+        model.addAttribute("modList", modList);
         return "dashboard";
     }
 

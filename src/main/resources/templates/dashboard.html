@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>OnlyPets | Dashboard</title>
     <link rel="stylesheet" type="text/css" href="/global.css"/>
+    <link rel="stylesheet" type="text/css" href="/dashboard.css"/>
     <link rel="stylesheet" type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 
@@ -11,11 +12,12 @@
 
 </head>
 <body>
+<nav>
 <span id="nav-left">
         <a href="/" id="logo">OnlyPets</a>
     </span>
 
-<span id="nav-right">
+    <span id="nav-right">
 
         <form action="/logout" method="POST" sec:authorize="isAuthenticated()">
             <input type="submit" value="Logout"/>
@@ -25,7 +27,10 @@
         </form>
 
     </span>
-<form id="post" method="POST" action="#" th:action="@{/dashboard/hire}" sec:authorize="isAuthenticated()" enctype="multipart/form-data">
+</nav>
+
+<span id="center">
+    <form id="post" method="POST" action="#" th:action="@{/dashboard/hire}" sec:authorize="isAuthenticated()" enctype="multipart/form-data">
     <input type="text" name="title" placeholder="Enter Username" maxlength="75" />
     <input type="submit" value="Hire" />
     <input type="hidden" name="author" th:value="${#authentication.getPrincipal().getUsername()}" />
@@ -33,6 +38,23 @@
            th:name="${_csrf.parameterName}"
            th:value="${_csrf.token}"/>
 </form>
+
+<table>
+    <thead>
+    <tr>
+        <th> Hired Mods</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${modList}">
+        <td> <a th:href="@{/user/id={id}(id=${user.id})}" th:text=" ${user.id}" > </a></td>
+        <td th:text="${user.username}"></td>
+    </tr>
+    </tbody>
+</table>
+</span>
+
 
 
 

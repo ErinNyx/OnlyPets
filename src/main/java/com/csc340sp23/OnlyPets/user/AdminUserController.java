@@ -19,7 +19,7 @@ public class AdminUserController {
             userService.save(user);
             System.out.println("User role after fireMod(): " + user.getRole());
         }
-        return "hire";
+        return "redirect:/dashboard";
 
     }
     @PostMapping("/fire")
@@ -30,7 +30,7 @@ public class AdminUserController {
             userService.save(user);
             System.out.println("User role after fireMod(): " + user.getRole());
         }
-        return "dashboard";
+        return "redirect:/dashboard";
 
     }
 }
