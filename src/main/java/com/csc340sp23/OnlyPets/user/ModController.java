@@ -26,6 +26,7 @@ public class ModController {
 
     @PostMapping("/timeout")
     public String timeoutUser(String username, int duration){
+
         // Gets start time for timeout period.
         long date = System.currentTimeMillis();
         
@@ -37,13 +38,11 @@ public class ModController {
 
         long timeout = timeMillis + date;
 
-        System.out.println(timeout);
-
         user.setTimedout(timeout);
 
         userService.save(user);
 
-        return "redirect:/dashboard";
+        return "redirect:/";
     }
     
     @GetMapping("/timeout")
