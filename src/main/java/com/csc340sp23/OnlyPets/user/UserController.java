@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
+
 import java.util.List;
 
 @Controller
@@ -24,7 +29,7 @@ public class UserController {
     AdminUserController adminUserController;
 
     @PostMapping("/register")
-    public String registerUser(User user, RedirectAttributes re) {
+    public String registerUser(User user, RedirectAttributes re) throws UnirestException {
 
         // Redirect attributes is a wonderful thing
         // it allows me to use thymeleaf to set fields or even create alert modals
@@ -62,6 +67,7 @@ public class UserController {
 
         user.setAvatar("/assets/avatars/default.png");
         user.setRole(role);
+        user.set_email_verified(false);
         userService.save(user);
 
         //temporary for testing purposes
@@ -72,6 +78,26 @@ public class UserController {
 
         settingsService.save(setting);
 
+        String code = user.getUsername() + "&code=";
+        String options = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+
+        for(int i = 0; i < 50; i++) {
+            int rand = (int) Math.floor(Math.random() * options.length());
+            code += options.substring(rand, rand + 1);
+        }
+
+        HttpResponse<JsonNode> request = Unirest
+                .post("https://api.mailgun.net/v3/sandbox9873cf9eca034b4884e2a7048cb9b7c8.mailgun.org/messages")
+			.basicAuth("api", "181449aa-839757f8")
+                .queryString("from", "no-reply@onlypets.com")
+                .queryString("to", user.getEmail())
+                .queryString("subject", "Verify your OnlyPets Account")
+                .queryString("text", "Verify your OnlyPets account by clicking the following link: " +
+                        "http://127.0.0.1:8081/verify/"+code)
+                .asJson();
+
+        user.setVerificationCode(code);
+
         return "redirect:/login";
     }
 
@@ -81,17 +107,7 @@ public class UserController {
         return "register";
     }
 
-    // Was testing to see if Authentication was working. Turns out, even if the user has USER as role, they can still
-    // call the /admin/test url, it just shows as 404.
-    // Even though if you're not authenticated at all you get redirected
-    // to login which was the expected behaviour for a USER trying to access ADMIN resources but ig I was wrong on that
-    // assumption. Don't assume things kids, I spent like 12 hours on this.
-
-    /*@GetMapping("/admin/test")
-    public String authTest(Model model) {
-        return "temporary-admin-test-for-auth";
-    }*/
-
+    // Probs not the only issue, just what I noticed while adding my own code. Needs to be GetMapping
     @PostMapping("/dashboard")
     public String dashboardPage(Model model){
         List<User> listUsers = userService.getAllUsers();
@@ -99,4 +115,8 @@ public class UserController {
         return "dashboard";
     }
 
+    @PostMapping("/verify/{code}")
+    public String verifyAccount() {
+        return "redirect:/";
+    }
 }
