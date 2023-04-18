@@ -48,6 +48,7 @@ public class WebSecurityConfig {
                 .formLogin((form) -> form
                         .loginPage("/login")
                         .permitAll()
+                        .failureUrl("/login?error=true")
                 ).exceptionHandling((x) -> x.accessDeniedPage("/403"))
                 .logout((logout) -> logout.permitAll());
 
