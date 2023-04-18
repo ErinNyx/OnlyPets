@@ -3,7 +3,9 @@ package com.csc340sp23.OnlyPets.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,7 +34,7 @@ public class UserService {
     public User getUserByUsername(String username) {
         List<User> users = getAllUsers();
         return users.stream().filter(user -> user.getUsername().equals(username))
-                        .findFirst().orElse(null);
+                .findFirst().orElse(null);
     }
 
     // Filters list of users and returns user object where email == param

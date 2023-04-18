@@ -135,7 +135,7 @@ public class PostController {
         User user = userService.getUserByUsername(username);
         Post post = postService.getPostById(postId);
 
-        if(!user.getUsername().equals(post.getAuthor())) return;
+        if(!user.getUsername().equals(post.getAuthor()) && !user.getRole().equals("MOD") && !user.getRole().equals("ADMIN"))  return;
 
         postService.deletePost(post);
     }
