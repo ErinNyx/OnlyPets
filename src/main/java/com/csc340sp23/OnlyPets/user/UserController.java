@@ -66,7 +66,7 @@ public class UserController {
         userService.save(user);
 
         //temporary for testing purposes
-        if(user.getUsername().equals("modmepls")) adminUserController.hireMod(user);
+        if(user.getUsername().equals("modmepls")) adminUserController.hireMod(user.getUsername());
 
         // Creates user settings and saves
         Settings setting = new Settings(user.id);
@@ -92,7 +92,6 @@ public class UserController {
     public String authTest(Model model) {
         return "temporary-admin-test-for-auth";
     }*/
-
     @PostMapping("/dashboard")
     public String dashboardPage(Model model){
         List<User> modList = userService.getUsersByRole();
@@ -100,5 +99,6 @@ public class UserController {
         model.addAttribute("modList", modList);
         return "dashboard";
     }
+
 
 }

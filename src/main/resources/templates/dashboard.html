@@ -30,10 +30,19 @@
 </nav>
 
 <span id="center">
-    <form id="post" method="POST" action="#" th:action="@{/dashboard/hire}" sec:authorize="isAuthenticated()" enctype="multipart/form-data">
-    <input type="text" name="title" placeholder="Enter Username" maxlength="75" />
+    <form method="POST" action="#" th:action="@{/dashboard/hire}" sec:authorize="isAuthenticated()" enctype="multipart/form-data">
+    <input type="text" name="userName" placeholder="Enter Username" maxlength="75" />
     <input type="submit" value="Hire" />
-    <input type="hidden" name="author" th:value="${#authentication.getPrincipal().getUsername()}" />
+
+    <input type="hidden"
+           th:name="${_csrf.parameterName}"
+           th:value="${_csrf.token}"/>
+</form>
+
+        <form method="POST" action="#" th:action="@{/dashboard/fire}" sec:authorize="isAuthenticated()" enctype="multipart/form-data">
+    <input type="text" name="userName" placeholder="Enter Username" maxlength="75" />
+    <input type="submit" value="Fire" />
+
     <input type="hidden"
            th:name="${_csrf.parameterName}"
            th:value="${_csrf.token}"/>
@@ -53,6 +62,7 @@
     </tr>
     </tbody>
 </table>
+
 </span>
 
 
