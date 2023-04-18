@@ -62,7 +62,7 @@ public class UserDetailsService implements org.springframework.security.core.use
                 long time = System.currentTimeMillis();
                 System.out.println(time);
                 System.out.println(user.getTimedout());
-                if (user.getTimedout() > time){
+                if (user.getTimedout() > time || !user.is_email_verified()){
                     return false;
                 }
                 else {
