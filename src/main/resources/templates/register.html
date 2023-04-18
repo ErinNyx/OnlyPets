@@ -6,6 +6,13 @@
     <link rel="stylesheet" type="text/css" href="/global.css" />
     <link rel="stylesheet" type="text/css" href="/login.css" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+    <script>
+        function closeModal() {
+            document.querySelector('.alert').remove();
+        }
+    </script>
+
 </head>
 <body>
 <nav>
@@ -17,7 +24,12 @@
         <a href="/login">Login</a>
     </span>
 </nav>
-<div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}" />
+
+<div class="alert alert-danger" role="alert" th:if="${error}">
+    <span th:text="${error}" />
+    <a onclick="closeModal()">Ok</a>
+</div>
+
 <div class="container">
     <form id="form" action="/register" method="POST">
         <input type="text" name="email" placeholder="Email" th:value="${email}" required />

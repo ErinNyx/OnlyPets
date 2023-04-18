@@ -50,18 +50,3 @@ form input[type='submit']:hover{
     top: 90%;
     transorm: translateY(-10%);
 }
-
-.alert {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%);
-
-    height: 25vh;
-    width: 35vw;
-
-    display: block;
-    background: white;
-    border-radius: 2vh;
-    box-shadow: 6px 6px 0 0px rgba(0,0,0,.25), 0 0px rgba(0,0,0,.25), 0px 0 0 0px rgba(0,0,0,.25), 0 0px 0px 0px #000000;
-}
