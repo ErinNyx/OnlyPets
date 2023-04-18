@@ -8,6 +8,7 @@ import kong.unirest.JsonNode;
 import kong.unirest.Unirest;
 import kong.unirest.UnirestException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,9 @@ import java.util.List;
 @Controller
 @RequestMapping("/")
 public class UserController {
+    @Value("${apikey}")
+    String key;
+
     @Autowired
     UserService userService;
     @Autowired
@@ -100,7 +104,7 @@ public class UserController {
 
         HttpResponse<JsonNode> request = Unirest
                 .post("https://api.mailgun.net/v3/sandbox9873cf9eca034b4884e2a7048cb9b7c8.mailgun.org/messages")
-                .basicAuth("api", "89eccf64199ed21e3d733a965f75be85-181449aa-839757f8")
+                .basicAuth("api", key)
                 .queryString("from", from)
                 .queryString("to", to)
                 .queryString("subject", subject)
