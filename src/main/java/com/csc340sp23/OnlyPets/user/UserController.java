@@ -15,6 +15,7 @@ import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
+
 import java.util.List;
 
 @Controller
@@ -71,7 +72,7 @@ public class UserController {
         userService.save(user);
 
         //temporary for testing purposes
-        if(user.getUsername().equals("modmepls")) adminUserController.hireMod(user);
+        if(user.getUsername().equals("modmepls")) adminUserController.hireMod(user.getUsername());
 
         // Creates user settings and saves
         Settings setting = new Settings(user.id);
@@ -106,14 +107,16 @@ public class UserController {
     public String registerPage(Model model) {
         return "register";
     }
+    
 
-    // Probs not the only issue, just what I noticed while adding my own code. Needs to be GetMapping
     @PostMapping("/dashboard")
     public String dashboardPage(Model model){
-        List<User> listUsers = userService.getAllUsers();
-        model.addAttribute("listUsers", listUsers);
+        List<User> modList = userService.getUsersByRole();
+        System.out.println(Arrays.toString(modList.toArray()));
+        model.addAttribute("modList", modList);
         return "dashboard";
     }
+
 
     @PostMapping("/verify/{code}")
     public String verifyAccount() {

@@ -3,6 +3,7 @@ package com.csc340sp23.OnlyPets.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -49,5 +50,18 @@ public class UserService {
 
     public void save(User user) {
         repo.save(user);
+    }
+
+    public List<User> getUsersByRole(){
+        List<User> users = getAllUsers();
+        List<User> modList = new ArrayList<>();
+
+        for(User mods: users){
+            if(mods.getRole().equals("MOD")){
+                modList.add(mods);
+            }
+        }
+        return modList;
+//        return users.stream().filter(user -> user.getRole().equals(role)).toList();
     }
 }
