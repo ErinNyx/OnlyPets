@@ -12,23 +12,25 @@ public class AdminUserController {
     @Autowired UserService userService;
 
     @PostMapping("/hire")
-    public void hireMod(User user){
-        if(!userService.getUserById(user.getId()).getRole().equalsIgnoreCase("MOD")){
+    public String hireMod(User user){
+        if(!userService.getUserByUsername(user.getUsername()).getRole().equalsIgnoreCase("MOD")){
             System.out.println("User role after registration: " + user.getRole());
             user.setRole("MOD");
             userService.save(user);
             System.out.println("User role after fireMod(): " + user.getRole());
         }
+        return "hire";
 
     }
     @PostMapping("/fire")
-    public void fireMod(User user){
-        if(userService.getUserById(user.getId()).getRole().equalsIgnoreCase("MOD")){
+    public String fireMod(User user){
+        if(userService.getUserByUsername(user.getUsername()).getRole().equalsIgnoreCase("MOD")){
             System.out.println("User role after registration: " + user.getRole());
             user.setRole("USER");
             userService.save(user);
             System.out.println("User role after fireMod(): " + user.getRole());
         }
+        return "dashboard";
 
     }
 }
