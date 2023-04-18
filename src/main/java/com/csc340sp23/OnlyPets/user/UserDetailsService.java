@@ -1,5 +1,7 @@
 package com.csc340sp23.OnlyPets.user;
 
+import com.csc340sp23.OnlyPets.settings.Settings;
+import com.csc340sp23.OnlyPets.settings.SettingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -7,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLOutput;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -14,6 +17,8 @@ import java.util.Collection;
 public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
     @Autowired
     UserService userService;
+    @Autowired
+    SettingsService settingsService;
 
     // This is called in the websecurityconfig file in configureGlobal for every authentication.
     // I just have a custom UserService which isn't recommended apparently by like everyone
@@ -30,6 +35,7 @@ public class UserDetailsService implements org.springframework.security.core.use
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userService.getUserByUsername(username);
         if(user == null) throw new UsernameNotFoundException("Username not found: " + username);
+        System.out.println("ID:" + user.getId());
         return new UserDetails() {
             @Override
             public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -53,7 +59,15 @@ public class UserDetailsService implements org.springframework.security.core.use
 
             @Override
             public boolean isAccountNonLocked() {
-                return true;
+                long time = System.currentTimeMillis();
+                System.out.println(time);
+                System.out.println(user.getTimedout());
+                if (user.getTimedout() > time || !user.is_email_verified()){
+                    return false;
+                }
+                else {
+                    return true;
+                }
             }
 
             @Override
