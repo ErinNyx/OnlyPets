@@ -60,8 +60,6 @@ public class UserDetailsService implements org.springframework.security.core.use
             @Override
             public boolean isAccountNonLocked() {
                 long time = System.currentTimeMillis();
-                System.out.println(time);
-                System.out.println(user.getTimedout());
                 if (user.getTimedout() > time){
                     return false;
                 }

@@ -58,6 +58,8 @@
             })).then(() => alert('Report submitted. If you think we\'ll need additional information to wewontcheckthisemailaddress@gofuckyourself.com'));
             req();
         }
+
+
     </script>
 </head>
 <body>
@@ -153,6 +155,8 @@
                th:id="${'report' + post.getId()}"
                onclick="reportHandler(this.getAttribute('data-user'), this.getAttribute('data-post'))"
                sec:authorize="isAuthenticated()">Report User</a>
+
+            <a href="/timeout" sec:authorize="hasAnyAuthority('ADMIN') or hasAnyAuthority('MOD')">Timeout User</a>
         </span>
     </div>
 </section>

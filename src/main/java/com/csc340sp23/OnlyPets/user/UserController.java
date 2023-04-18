@@ -1,5 +1,7 @@
 package com.csc340sp23.OnlyPets.user;
 
+import com.csc340sp23.OnlyPets.post.Post;
+import com.csc340sp23.OnlyPets.post.PostService;
 import com.csc340sp23.OnlyPets.settings.Settings;
 import com.csc340sp23.OnlyPets.settings.SettingsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,8 @@ public class UserController {
     
     @Autowired
     AdminUserController adminUserController;
+    @Autowired
+    PostService postService;
 
     @PostMapping("/register")
     public String registerUser(User user, RedirectAttributes re) {
