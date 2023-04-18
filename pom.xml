@@ -50,9 +50,9 @@
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.mashape.unirest</groupId>
+			<groupId>com.konghq</groupId>
 			<artifactId>unirest-java</artifactId>
-			<version>1.4.9</version>
+			<version>3.14.1</version>
 		</dependency>
 	</dependencies>
 

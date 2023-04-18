@@ -48,11 +48,6 @@ public class Router {
         return "home-moderator";
     }
 
-    @GetMapping("/login")
-    public String loginPage() {
-        return "login";
-    }
-
     @GetMapping("/admin-hired")
     public String adminHiredPage() {
         return "admin-hired";

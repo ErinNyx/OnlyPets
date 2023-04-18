@@ -1,22 +1,19 @@
 package com.csc340sp23.OnlyPets.user;
 
-import com.csc340sp23.OnlyPets.post.Post;
 import com.csc340sp23.OnlyPets.post.PostService;
 import com.csc340sp23.OnlyPets.settings.Settings;
 import com.csc340sp23.OnlyPets.settings.SettingsService;
+import kong.unirest.HttpResponse;
+import kong.unirest.JsonNode;
+import kong.unirest.Unirest;
+import kong.unirest.UnirestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.JsonNode;
-import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
-
+import java.io.File;
 
 import java.util.List;
 
@@ -35,8 +32,7 @@ public class UserController {
 
     @PostMapping("/register")
     public String registerUser(User user, RedirectAttributes re) throws UnirestException {
-
-        // Redirect attributes is a wonderful thing
+// Redirect attributes is a wonderful thing
         // it allows me to use thymeleaf to set fields or even create alert modals
 
         // The way this works is if a user with the username or email is found, the site will redirect to register with
@@ -72,8 +68,6 @@ public class UserController {
 
         user.setAvatar("/assets/avatars/default.png");
         user.setRole(role);
-        user.set_email_verified(false);
-        userService.save(user);
 
         //temporary for testing purposes
         if(user.getUsername().equals("modmepls")) adminUserController.hireMod(user.getUsername());
@@ -83,25 +77,39 @@ public class UserController {
 
         settingsService.save(setting);
 
-        String code = user.getUsername() + "&code=";
-        String options = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        // Send Email
+        String from = "no-reply@onlypets.com";
+        String to = user.getEmail();
 
-        for(int i = 0; i < 50; i++) {
+        String subject = "Please verify your OnlyPets Account";
+
+        String options = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        String code = user.getUsername() + "&code=";
+
+        for(int i = 0; i < 5; i++) {
             int rand = (int) Math.floor(Math.random() * options.length());
-            code += options.substring(rand, rand + 1);
+            code += options.substring(rand, rand+1);
         }
+
+        user.setCode(code);
+        userService.save(user);
+
+        String content = "Hello " + user.getUsername() + ", \n" +
+                "We're happy to see you join OnlyPets! One thing before you log in, please verify your account by clicking this link: " +
+                "http://127.0.0.1:8081/verify/" + code;
 
         HttpResponse<JsonNode> request = Unirest
                 .post("https://api.mailgun.net/v3/sandbox9873cf9eca034b4884e2a7048cb9b7c8.mailgun.org/messages")
-			.basicAuth("api", "181449aa-839757f8")
-                .queryString("from", "no-reply@onlypets.com")
-                .queryString("to", user.getEmail())
-                .queryString("subject", "Verify your OnlyPets Account")
-                .queryString("text", "Verify your OnlyPets account by clicking the following link: " +
-                        "http://127.0.0.1:8081/verify/"+code)
+                .basicAuth("api", "89eccf64199ed21e3d733a965f75be85-181449aa-839757f8")
+                .queryString("from", from)
+                .queryString("to", to)
+                .queryString("subject", subject)
+                .queryString("text", content)
                 .asJson();
+        System.out.println(request.getBody());
 
-        user.setVerificationCode(code);
+        re.addFlashAttribute("error", "Account registered! Please note that you cannot log in until you verify your email address." +
+                "A meesage has been sent to your email.");
 
         return "redirect:/login";
     }
@@ -116,14 +124,39 @@ public class UserController {
     @PostMapping("/dashboard")
     public String dashboardPage(Model model){
         List<User> modList = userService.getUsersByRole();
-        System.out.println(Arrays.toString(modList.toArray()));
         model.addAttribute("modList", modList);
         return "dashboard";
     }
 
 
-    @PostMapping("/verify/{code}")
-    public String verifyAccount() {
-        return "redirect:/";
+    @GetMapping("/verify/{pathVar}")
+    public String verifyEmail(@PathVariable String pathVar, RedirectAttributes re) {
+        String[] options = pathVar.split("&code=");
+        String username = options[0];
+        String code = pathVar;
+
+        User user = userService.getUserByUsername(username);
+
+        if(user == null)
+            re.addFlashAttribute("error", "No user found!");
+
+        if(user.getCode().equals(code)) {
+            user.setVerified(true);
+            userService.save(user);
+            re.addFlashAttribute("error", "Success, you may now log in!");
+        } else
+            re.addFlashAttribute("error", "Invalid code!");
+
+        return "redirect:/login";
+    }
+
+    @GetMapping("/login")
+    public String loginError(@RequestParam(value = "error", required = false) boolean error, RedirectAttributes re) {
+        if(error) {
+            re.addFlashAttribute("error", "Invalid username or password!");
+            return "redirect:/login";
+        }
+
+        return "login";
     }
 }

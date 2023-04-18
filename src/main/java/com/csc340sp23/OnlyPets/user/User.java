@@ -27,10 +27,10 @@ public class User {
     private String password;
     private String role;
     private String avatar;
-    private String verificationCode;
+    private String code;
     private long timedout;
     private boolean banned;
-    private boolean is_email_verified;
+    private boolean verified;
 
     // Creates a new user with email username and pass from form
     public User(String username, String email, String password) {

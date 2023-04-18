@@ -61,7 +61,7 @@ public class UserDetailsService implements org.springframework.security.core.use
             public boolean isAccountNonLocked() {
                 long time = System.currentTimeMillis();
 
-                if (user.getTimedout() > time || !user.is_email_verified()){
+                if (user.getTimedout() > time || !user.isVerified()){
                     return false;
                 }
                 else {
