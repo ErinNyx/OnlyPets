@@ -23,6 +23,9 @@ import java.util.List;
 public class UserController {
     @Value("${apikey}")
     String key;
+    
+    @Value("${api}")
+    String api;
 
     @Autowired
     UserService userService;
@@ -103,7 +106,7 @@ public class UserController {
                 "http://127.0.0.1:8081/verify/" + code;
 
         HttpResponse<JsonNode> request = Unirest
-                .post("https://api.mailgun.net/v3/sandbox9873cf9eca034b4884e2a7048cb9b7c8.mailgun.org/messages")
+                .post(api)
                 .basicAuth("api", key)
                 .queryString("from", from)
                 .queryString("to", to)
